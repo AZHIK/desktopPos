@@ -1,0 +1,29 @@
+import 'package:logger/logger.dart';
+
+class TLoggerHelper {
+  // Create a logger instance
+  static final Logger _logger = Logger(
+    printer: PrettyPrinter(),
+    level: Level.debug, // Customize the log levels based on your needs
+  );
+
+  // Log debug messages
+  static void debug(String message) {
+    _logger.d(message);
+  }
+
+  // Log info messages
+  static void info(String message) {
+    _logger.i(message);
+  }
+
+  // Log warning messages
+  static void warning(String message) {
+    _logger.w(message);
+  }
+
+  // Log error messages with optional error and stack trace
+  static void error(String message, [dynamic error]) {
+    _logger.e(message, error:error,stackTrace:StackTrace.current);
+  }
+}
