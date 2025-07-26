@@ -17,10 +17,13 @@ class AppPaginatedDataTable extends StatelessWidget {
     this.onPageChanged,
     this.sortColumnIndex,
     this.sortAscending = true,
-    this.dataRowHeight = AppSizes.xl*1.5,
+    this.dataRowHeight = AppSizes.xl * 1.3,
     this.minWidth = 1000,
     this.showCheckboxColumn = true,
     this.searchBar,
+    this.addButton,
+    this.excelExportButton,
+    this.pdfExportButton,
   });
 
   /// Columns of the table
@@ -52,18 +55,43 @@ class AppPaginatedDataTable extends StatelessWidget {
 
   /// Optional search bar widget (TextField)
   final Widget? searchBar;
-
+  final Widget? addButton;
+  final Widget? excelExportButton;
+  final Widget? pdfExportButton;
   @override
   Widget build(BuildContext context) {
     final dark = AppHelperFunctions.isDarkMode(context);
     return Column(
       children: [
-        if (searchBar != null)
-          Padding(padding: const EdgeInsets.all(8.0), child: searchBar!),
+        if (searchBar != null ||
+            addButton != null ||
+            excelExportButton != null ||
+            pdfExportButton != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+            child: Row(
+              children: [
+                if (searchBar != null) searchBar!,
+                const Spacer(), // Pushes the buttons to the right
+                if (excelExportButton != null) ...[
+                  excelExportButton!,
+                  const SizedBox(width: 8),
+                ],
+                if (pdfExportButton != null) ...[
+                  pdfExportButton!,
+                  const SizedBox(width: 8),
+                ],
+                if (addButton != null) addButton!,
+              ],
+            ),
+          ),
         Expanded(
           child: Theme(
             data: Theme.of(context).copyWith(
-              cardTheme:  CardThemeData(color:!dark? Colors.white:AppColors.dark, elevation: 0),
+              cardTheme: CardThemeData(
+                color: !dark ? AppColors.lightGrey : Colors.black,
+                elevation: 0,
+              ),
             ),
             child: PaginatedDataTable2(
               columns: columns,
@@ -75,17 +103,18 @@ class AppPaginatedDataTable extends StatelessWidget {
               showCheckboxColumn: showCheckboxColumn,
               columnSpacing: 12,
               minWidth: minWidth,
-              dividerThickness: 0,
+              dividerThickness: 0.4,
               headingRowHeight: 40.0, // 👈 Add this line
               horizontalMargin: 12,
               dataRowHeight: dataRowHeight,
               showFirstLastButtons: true,
               renderEmptyRowsInTheEnd: false,
-              headingTextStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: dark? AppColors.white : AppColors.white,
-                ),
+              headingTextStyle: TextStyle(
+                color: !dark ? AppColors.black : AppColors.darkGrey,
+                fontWeight: FontWeight.bold,
+              ),
               headingRowColor: WidgetStateProperty.all(
-                !dark?AppColors.primary:AppColors.darkerGrey,
+                !dark ? AppColors.white : AppColors.black,
               ),
               empty: AppAnimationLoaderWidget(
                 animation: AppImages.packageAnimation,
@@ -106,7 +135,7 @@ class AppPaginatedDataTable extends StatelessWidget {
                     size: AppSizes.iconSm,
                   );
                 } else {
-                  return const Icon(Iconsax.arrow_3, size: AppSizes.iconSm);
+                  return const Icon(Icons.swap_vert_rounded, size: 20);
                 }
               },
               onRowsPerPageChanged: (_) {},

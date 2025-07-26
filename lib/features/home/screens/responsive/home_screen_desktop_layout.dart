@@ -24,7 +24,7 @@ class HomeDesktopscreen extends StatelessWidget {
         children: [
           Expanded(child: AppSideBar()),
           Expanded(
-            flex: 5,
+            flex: 4,
             child: Container(
               decoration: BoxDecoration(
                 color: dark ? AppColors.black : AppColors.primaryBackground,

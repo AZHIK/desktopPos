@@ -25,7 +25,7 @@ class AppRoundedContainer extends StatelessWidget {
     this.margin,
     this.showShadow = true,
     this.showBorder = false,
-    this.padding = const EdgeInsets.all(AppSizes.md),
+    this.padding = const EdgeInsets.all(0),
     this.borderColor = AppColors.borderPrimary,
     this.radius = AppSizes.cardRadiusLg,
     this.backgroundColor = AppColors.white,
@@ -56,7 +56,7 @@ class AppRoundedContainer extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(radius),
-          border: showBorder ? Border.all(color: borderColor) : null,
+          border: showBorder ? Border.all(color: borderColor,width: 0.2) : null,
           boxShadow: [
             if (showShadow)
               BoxShadow(
