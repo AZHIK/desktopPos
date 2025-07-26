@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmavault/core/constants/colors.dart';
 import 'package:pharmavault/core/constants/sizes.dart';
-
+import 'package:pharmavault/core/utils/helpers.dart';
 
 /// A container widget with rounded corners and customizable properties.
 class AppRoundedContainer extends StatelessWidget {
@@ -17,6 +17,7 @@ class AppRoundedContainer extends StatelessWidget {
   ///   - backgroundColor: The background color of the container.
   ///   - borderColor: The color of the container's border.
   ///   - showBorder: A flag to determine if the container should have a border.
+
   const AppRoundedContainer({
     super.key,
     this.child,
@@ -24,7 +25,7 @@ class AppRoundedContainer extends StatelessWidget {
     this.height,
     this.margin,
     this.showShadow = true,
-    this.showBorder = false,
+    this.showBorder = true,
     this.padding = const EdgeInsets.all(0),
     this.borderColor = AppColors.borderPrimary,
     this.radius = AppSizes.cardRadiusLg,
@@ -46,6 +47,7 @@ class AppRoundedContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = AppHelperFunctions.isDarkMode(context);
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -54,9 +56,11 @@ class AppRoundedContainer extends StatelessWidget {
         padding: padding,
         margin: margin,
         decoration: BoxDecoration(
-          color: backgroundColor,
+          color: !dark ? backgroundColor : Colors.black,
           borderRadius: BorderRadius.circular(radius),
-          border: showBorder ? Border.all(color: borderColor,width: 0.2) : null,
+          border: showBorder
+              ? Border.all(color: borderColor, width: 0.2)
+              : null,
           boxShadow: [
             if (showShadow)
               BoxShadow(

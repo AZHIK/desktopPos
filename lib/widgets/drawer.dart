@@ -50,8 +50,12 @@ class AppSideBar extends StatelessWidget {
                         itemName: "Dashboard",
                         route: "/home"),
                     const AppMenuItem(
+                        icon: Iconsax.calculator,
+                        itemName: "Pos",
+                        route: "/pos"),
+                    const AppMenuItem(
                         icon: Iconsax.shopping_cart,
-                        itemName: "Cart",
+                        itemName: "Orders",
                         route: "/orders"),
                     const AppMenuItem(
                         icon: Iconsax.dcube,

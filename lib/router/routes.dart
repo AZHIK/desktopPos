@@ -5,6 +5,7 @@ import 'package:pharmavault/features/auth/screens/user_list.dart';
 import 'package:pharmavault/features/checkout/screens/checkout_screen.dart';
 import 'package:pharmavault/features/home/screens/homescreen.dart';
 import 'package:pharmavault/features/orders/screens/orders_screen.dart';
+import 'package:pharmavault/features/pos/screens/pos_products_screen.dart';
 import 'package:pharmavault/features/products/screens/products_list.dart';
 import 'package:pharmavault/features/sync/screens/sync_screen.dart';
 
@@ -32,6 +33,10 @@ final List<GoRoute> appRoutes =[
       GoRoute(
         path: '/users',
         builder: (context, state) => UserList(),
+      ),
+      GoRoute(
+        path: '/pos',
+        builder: (context, state) => PosScreen(),
       ),
     ];
 const String initialRoute = '/login';
